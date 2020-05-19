@@ -20,12 +20,12 @@ cluster is brought up with ipv6 support but without flannel or multi nic support
     if needed, docker can be tested with:
     `docker run --rm busybox ip a`  
     and make sure you get an ipv6 address  
-1. External IPv6 connectivity, if the host is capable of it:  
+1. With an IPv6-connected host, you may want the pods to be able to reach the rest of the IPv6 world, too:  
     Enable IPv6 NAT:
     ```console
     # ip6tables -t nat -A POSTROUTING -s 2001:db8:1::/64 -j MASQUERADE
     ```
-    (Note that the address used is the same one used for fixed-cidr-v6 in the previous step)
+    (Note that the address 2001:db8:1::/64 has to match fixed-cidr-v6 in /etc/docker/daemon.json)
 
     You will also need the host to be configured with an IPv6-reachable DNS server.  
     If you don't have one, you can use OpenDNS:
